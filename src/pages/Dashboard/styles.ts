@@ -69,13 +69,20 @@ export const ListAppointments = styled.div`
   flex: 1;
   margin-right: 120px;
 
-  h1 {
+  > h1 {
     font-size: 36px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
   }
 `;
 
-export const NextAppointment = styled.div`
+export const Appointment = styled.ul`
   margin-top: 64px;
+
+  & + div {
+    margin-top: 16px;
+  }
 
   div {
     background: #fff;
@@ -97,12 +104,12 @@ export const NextAppointment = styled.div`
       background: #414141;
     }
 
-    span {
+    li {
       display: flex;
       color: #414141;
     }
 
-    span + span {
+    li + li {
       font-size: 13px;
       margin-left: 5px;
     }

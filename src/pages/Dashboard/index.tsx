@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
-import { FiPower, FiCalendar } from 'react-icons/fi';
+import { FiPower } from 'react-icons/fi';
 import {
   Container,
   Header,
@@ -8,12 +8,40 @@ import {
   Profile,
   Content,
   ListAppointments,
-  NextAppointment,
+  Appointment,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
+
+interface Appointment {
+  id: string;
+  name: string;
+  address: string;
+  tel: string;
+  date: string;
+  done: boolean;
+  desc: string;
+}
 
 const Dashboard: React.FC = () => {
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+
   const { signOut, user } = useAuth();
+
+  // maintenance
+  useEffect(() => {
+    async function loadList() {
+      const response = await api.get('appointments');
+
+      const data = response.data.map((appointment) => ({
+        ...appointment,
+      }));
+
+      setAppointments(data);
+    }
+
+    loadList();
+  }, [appointments]);
 
   return (
     <Container>
@@ -39,16 +67,18 @@ const Dashboard: React.FC = () => {
         <ListAppointments>
           <h1>Orçamentos</h1>
 
-          <NextAppointment>
-            <div>
-              <span>Cliente</span>
-              <span>Rua feliz, 1800, Jd amanda</span>
-              <span>Tel: 4560-3232</span>
-              <span>10/08</span>
-              <span>Pendente</span>
-              <span>Cliente nao estava em casa</span>
-            </div>
-          </NextAppointment>
+          {showAppointments.map((appointment) => (
+            <Appointment>
+              <div>
+                <li>{appointment.name}</li>
+                <li>{appointment.address}</li>
+                <li>{appointment.tel}</li>
+                <li>{appointment.date}</li>
+                <li>{appointment.done}</li>
+                <li>{appointment.desc}</li>
+              </div>
+            </Appointment>
+          ))}
         </ListAppointments>
       </Content>
     </Container>
