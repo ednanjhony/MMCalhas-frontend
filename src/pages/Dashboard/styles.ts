@@ -78,8 +78,6 @@ export const ListAppointments = styled.div`
 `;
 
 export const Appointment = styled.ul`
-  margin-top: 64px;
-
   & + div {
     margin-top: 16px;
   }
@@ -91,7 +89,7 @@ export const Appointment = styled.ul`
     align-items: left;
     padding: 16px 24px;
     border-radius: 10px;
-    margin-top: 24px;
+    margin-top: 12px;
     position: relative;
 
     &::before {

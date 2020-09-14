@@ -30,17 +30,13 @@ const Dashboard: React.FC = () => {
 
   // maintenance
   useEffect(() => {
-    async function loadList() {
-      const response = await api.get('appointments');
+    api.get<Appointment[]>('appointments').then((response) => {
+      setAppointments(response.data);
+    });
+  }, []);
 
-      const data = response.data.map((appointment) => ({
-        ...appointment,
-      }));
-
-      setAppointments(data);
-    }
-
-    loadList();
+  const allAppointments = useMemo(() => {
+    return appointments;
   }, [appointments]);
 
   return (
@@ -67,7 +63,7 @@ const Dashboard: React.FC = () => {
         <ListAppointments>
           <h1>Orçamentos</h1>
 
-          {showAppointments.map((appointment) => (
+          {allAppointments.map((appointment) => (
             <Appointment>
               <div>
                 <li>{appointment.name}</li>
