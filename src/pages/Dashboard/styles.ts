@@ -34,12 +34,18 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 80px;
+  margin-left: 650px;
 
   img {
     width: 56px;
     height: 56px;
     border-radius: 50%;
+  }
+
+  a {
+    &:hover {
+      opacity: 0.5;
+    }
   }
 
   div {

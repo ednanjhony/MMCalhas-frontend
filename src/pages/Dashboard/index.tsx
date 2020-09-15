@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
 import { FiPower } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -46,9 +47,12 @@ const Dashboard: React.FC = () => {
           <h1>MMCalhas</h1>
 
           <Profile>
-            <img src={user.avatar_url} alt={user.name} />
+            <Link to="/profile">
+              <img src={user.avatar_url} alt={user.name} />
+            </Link>
             <div>
               <span>Bem-vindo</span>
+
               <h2>{user.name}</h2>
             </div>
           </Profile>
