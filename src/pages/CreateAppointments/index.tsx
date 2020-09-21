@@ -1,7 +1,9 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 
 import { FiPower } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import {
   Container,
   Header,
@@ -10,9 +12,12 @@ import {
   Content,
   Form,
   Appointment,
+  Button,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
+import { useToast } from '../../hooks/toast';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 interface Appointment {
   id: string;
@@ -25,29 +30,57 @@ interface Appointment {
 }
 
 const CreateAppointments: React.FC = () => {
-  const [newAppointment, setNewAppointment] = useState('');
-  const [appointments, setAppoinments] = useState<Appointment[]>([]);
-
   const { signOut, user } = useAuth();
+  const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
+  const history = useHistory();
 
-  async function handleAddAppointment(
-    event: FormEvent<HTMLFormElement>,
-  ): Promise<void> {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (data: Appointment) => {
+      try {
+        formRef.current?.setErrors({});
 
-    try {
-      const response = await api.post<Appointment>(
-        `appointments/${newAppointment}`,
-      );
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatorio'),
+          address: Yup.string().required('E-mail obrigatorio'),
+          tel: Yup.string(),
+          date: Yup.string().required('Data obrigatoria'),
+          done: Yup.boolean().required('Campo obrigatorio'),
+          desc: Yup.string(),
+        });
 
-      const appointment = response.data;
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      setAppoinments([...appointments, appointment]);
-      setNewAppointment('');
-    } catch (err) {
-      throw new Error('Algo deu errado.');
-    }
-  }
+        await api.post('/appointments', data);
+
+        history.push('/');
+
+        addToast({
+          type: 'success',
+          title: 'Orçamento registrado com sucesso',
+          description: 'Voce ja pode visualizar no dashboard',
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const error = getValidationErrors(err);
+
+          formRef.current?.setErrors(error);
+
+          return;
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro ao cadastrar orçamento',
+          description:
+            'Ocorreu um erro ao cadastrar orçamento, tente novamente',
+        });
+      }
+    },
+    [addToast, history],
+  );
 
   return (
     <Container>
@@ -73,12 +106,17 @@ const CreateAppointments: React.FC = () => {
       </Header>
 
       <Content>
-        <Form>
-          <input
-            value={newAppointment}
-            onChange={(e) => setNewAppointment(e.target.value)}
-            placeholder="Digite o nome do cliente"
-          />
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>Cadastre um orçamento</h1>
+
+          <input name="name" placeholder="Nome" />
+          <input name="address" placeholder="Endereço" />
+          <input name="tel" placeholder="Telefone" />
+          <input name="date" placeholder="Data" />
+          <input name="done" />
+          <input name="desc" placeholder="Descriçao" />
+
+          <Button type="submit">Cadastrar</Button>
         </Form>
       </Content>
     </Container>

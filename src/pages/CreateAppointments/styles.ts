@@ -119,3 +119,5 @@ export const Appointment = styled.ul`
     }
   }
 `;
+
+export const Button = styled.div``;
