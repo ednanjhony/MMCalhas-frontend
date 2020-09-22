@@ -4,15 +4,16 @@ import * as Yup from 'yup';
 import { FiPower } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 import {
   Container,
   Header,
   HeaderContent,
   Profile,
   Content,
-  Form,
   Appointment,
-  Button,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -109,12 +110,15 @@ const CreateAppointments: React.FC = () => {
         <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Cadastre um orçamento</h1>
 
-          <input name="name" placeholder="Nome" />
-          <input name="address" placeholder="Endereço" />
-          <input name="tel" placeholder="Telefone" />
-          <input name="date" placeholder="Data" />
-          <input name="done" />
-          <input name="desc" placeholder="Descriçao" />
+          <Input name="name" placeholder="Nome" />
+          <Input name="address" placeholder="Endereço" />
+          <Input name="tel" placeholder="Telefone" />
+          <Input name="date" placeholder="Data" />
+          <Input
+            name="done"
+            placeholder="Orçamento ja foi feito ? True or False"
+          />
+          <Input name="desc" placeholder="Descriçao" />
 
           <Button type="submit">Cadastrar</Button>
         </Form>

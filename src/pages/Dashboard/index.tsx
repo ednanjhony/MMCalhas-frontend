@@ -29,7 +29,6 @@ const Dashboard: React.FC = () => {
 
   const { signOut, user } = useAuth();
 
-  // maintenance
   useEffect(() => {
     api.get<Appointment[]>('appointments').then((response) => {
       setAppointments(response.data);

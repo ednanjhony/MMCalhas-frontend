@@ -69,17 +69,18 @@ export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
   display: flex;
-`;
+  justify-content: center;
 
-export const Form = styled.div`
-  flex: 1;
-  margin-right: 120px;
+  Form {
+    width: 600px;
+    text-align: center;
 
-  > h1 {
-    font-size: 36px;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+    > h1 {
+      font-size: 36px;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
   }
 `;
 
@@ -119,5 +120,3 @@ export const Appointment = styled.ul`
     }
   }
 `;
-
-export const Button = styled.div``;
