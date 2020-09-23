@@ -10,6 +10,7 @@ import {
   Content,
   ListAppointments,
   Appointment,
+  Sidebar,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -61,6 +62,18 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
+
+      <Sidebar>
+        <ul>
+          <li>
+            <Link to="/">Dashboard</Link>
+          </li>
+
+          <li>
+            <Link to="create_appointments">Criar orçamentos</Link>
+          </li>
+        </ul>
+      </Sidebar>
 
       <Content>
         <ListAppointments>

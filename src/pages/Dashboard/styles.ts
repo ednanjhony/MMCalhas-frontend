@@ -5,7 +5,6 @@ export const Container = styled.div``;
 export const Header = styled.header`
   padding: 32px 0;
   background: #fff;
-  border-radius: 0 0 10px 10px;
 `;
 
 export const HeaderContent = styled.div`
@@ -116,6 +115,68 @@ export const Appointment = styled.ul`
     li + li {
       font-size: 13px;
       margin-left: 5px;
+    }
+  }
+`;
+
+export const Sidebar = styled.div`
+  position: fixed;
+  width: 60px;
+  top: 125px;
+  height: 100vh;
+  z-index: 100;
+  background-color: #fff;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  cursor: pointer;
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
+  &:hover {
+    width: 200px;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: 80px;
+  }
+
+  ul {
+    list-style-type: none;
+    color: white;
+    &:first-child {
+      padding-top: 1.5rem;
+    }
+
+    li {
+      padding-bottom: 4rem;
+
+      a {
+        position: relative;
+        display: block;
+        top: 10px;
+        padding-left: 25px;
+        padding-right: 15px;
+        transition: all ease;
+        margin-left: 25px;
+        margin-right: 10px;
+        text-decoration: none;
+        color: #414141;
+        font-weight: 100;
+        font-size: 15px;
+        &:after {
+          content: '';
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 2px;
+          opacity: 0;
+          transition: all ease;
+          z-index: -10;
+        }
+      }
+      &:hover a:after {
+        opacity: 1;
+      }
     }
   }
 `;
