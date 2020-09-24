@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { FiPower } from 'react-icons/fi';
+import { FiPower, FiCalendar, FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -66,11 +66,29 @@ const Dashboard: React.FC = () => {
       <Sidebar>
         <ul>
           <li>
-            <Link to="/">Dashboard</Link>
+            <Link to="/">
+              <FiCalendar />
+              Orçamentos
+            </Link>
           </li>
 
           <li>
-            <Link to="create_appointments">Criar orçamentos</Link>
+            <Link to="create_appointments">
+              <FiPlus />
+              Criar orçamentos
+            </Link>
+          </li>
+
+          <li>
+            <Link to="#">Fornecedores</Link>
+          </li>
+
+          <li>
+            <Link to="#">Adicionar novo fornecedor</Link>
+          </li>
+
+          <li>
+            <Link to="#">Fluxo de caixa</Link>
           </li>
         </ul>
       </Sidebar>

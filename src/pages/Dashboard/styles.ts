@@ -121,21 +121,20 @@ export const Appointment = styled.ul`
 
 export const Sidebar = styled.div`
   position: fixed;
-  width: 60px;
+  width: 200px;
   top: 125px;
   height: 100vh;
-  z-index: 100;
   background-color: #fff;
   overflow: hidden;
   transition: width 0.3s ease;
   cursor: pointer;
   box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
   &:hover {
-    width: 200px;
+    width: 250px;
   }
 
   @media screen and (min-width: 600px) {
-    width: 80px;
+    width: 70px;
   }
 
   ul {
@@ -176,6 +175,19 @@ export const Sidebar = styled.div`
       }
       &:hover a:after {
         opacity: 1;
+      }
+
+      svg {
+        width: 26px;
+        height: 26px;
+        position: relative;
+        left: -25px;
+        cursor: pointer;
+        @media screen and (min-width: 600px) {
+          width: 32px;
+          height: 32px;
+          left: -15px;
+        }
       }
     }
   }
