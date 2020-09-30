@@ -120,75 +120,60 @@ export const Provider = styled.ul`
 `;
 
 export const Sidebar = styled.div`
-  position: fixed;
-  width: 200px;
-  top: 125px;
+  width: 5rem;
   height: 100vh;
+  position: fixed;
   background-color: #fff;
-  overflow: hidden;
-  transition: width 0.3s ease;
-  cursor: pointer;
-  box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
-  &:hover {
-    width: 250px;
-  }
-
-  @media screen and (min-width: 600px) {
-    width: 70px;
-  }
+  top: 130px;
+  transition: width 200ms ease;
 
   ul {
-    list-style-type: none;
-    color: white;
-    &:first-child {
-      padding-top: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     li {
-      padding-bottom: 4rem;
+      width: 100%;
+    }
 
-      a {
-        position: relative;
-        display: block;
-        top: 10px;
-        padding-left: 25px;
-        padding-right: 15px;
-        transition: all ease;
-        margin-left: 25px;
-        margin-right: 10px;
-        text-decoration: none;
-        color: #414141;
-        font-weight: 100;
-        font-size: 15px;
-        &:after {
-          content: '';
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          border-radius: 2px;
-          opacity: 0;
-          transition: all ease;
-          z-index: -10;
-        }
-      }
-      &:hover a:after {
-        opacity: 1;
-      }
+    a {
+      display: flex;
+      align-items: center;
+      height: 5rem;
+      text-decoration: none;
+      filter: grayscale(100%) opacity(0.7);
+      transition: 1s;
+    }
 
-      svg {
-        width: 26px;
-        height: 26px;
-        position: relative;
-        left: -25px;
-        cursor: pointer;
-        @media screen and (min-width: 600px) {
-          width: 32px;
-          height: 32px;
-          left: -15px;
-        }
-      }
+    a:hover {
+      filter: grayscale(0%) opacity(0.5);
+      background: #414141;
+    }
+
+    span {
+      display: none;
+      margin-left: 1rem;
+      color: black;
+    }
+
+    svg {
+      min-width: 2rem;
+      margin: 0 1.5rem;
+      color: black;
+    }
+
+    ul:hover {
+      width: 16rem;
+      height: 100%;
+      background-color: #fff;
+    }
+
+    ul:hover span {
+      display: block;
     }
   }
 `;

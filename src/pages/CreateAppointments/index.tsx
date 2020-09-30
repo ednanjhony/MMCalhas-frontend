@@ -1,13 +1,26 @@
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 
-import { FiPower } from 'react-icons/fi';
+import {
+  FiPower,
+  FiCalendar,
+  FiPlus,
+  FiTruck,
+  FiDollarSign,
+} from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import { Container, Header, HeaderContent, Profile, Content } from './styles';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Content,
+  Sidebar,
+} from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
@@ -98,6 +111,45 @@ const CreateAppointments: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
+
+      <Sidebar>
+        <ul>
+          <li>
+            <Link to="/">
+              <FiCalendar />
+              <span>Orçamentos</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="create_appointments">
+              <FiPlus />
+              <span>Criar orçamentos</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="providers">
+              <FiTruck />
+              <span>Fornecedores</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="create_providers">
+              <FiPlus />
+              <span>Adicionar novo fornecedor</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="#">
+              <FiDollarSign />
+              <span>Fluxo de caixa</span>
+            </Link>
+          </li>
+        </ul>
+      </Sidebar>
 
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>

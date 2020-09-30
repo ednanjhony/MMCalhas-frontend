@@ -105,3 +105,62 @@ export const AvatarInput = styled.div`
     }
   }
 `;
+
+export const Sidebar = styled.div`
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+  background-color: #fff;
+  top: 150px;
+  transition: width 200ms ease;
+
+  ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    li {
+      width: 100%;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      height: 5rem;
+      text-decoration: none;
+      filter: grayscale(100%) opacity(0.7);
+      transition: 1s;
+    }
+
+    a:hover {
+      filter: grayscale(0%) opacity(0.5);
+      background: #414141;
+    }
+
+    span {
+      display: none;
+      margin-left: 1rem;
+      color: black;
+    }
+
+    svg {
+      min-width: 2rem;
+      margin: 0 1.5rem;
+      color: black;
+    }
+
+    ul:hover {
+      width: 16rem;
+      height: 100%;
+      background-color: #fff;
+    }
+
+    ul:hover span {
+      display: block;
+    }
+  }
+`;

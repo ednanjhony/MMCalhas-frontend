@@ -1,6 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { FiPower, FiCalendar, FiPlus } from 'react-icons/fi';
+import {
+  FiPower,
+  FiCalendar,
+  FiPlus,
+  FiTruck,
+  FiDollarSign,
+} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -64,27 +70,36 @@ const Providers: React.FC = () => {
           <li>
             <Link to="/">
               <FiCalendar />
-              Orçamentos
+              <span>Orçamentos</span>
             </Link>
           </li>
 
           <li>
             <Link to="create_appointments">
               <FiPlus />
-              Criar orçamentos
+              <span>Criar orçamentos</span>
             </Link>
           </li>
 
           <li>
-            <Link to="providers">Fornecedores</Link>
+            <Link to="providers">
+              <FiTruck />
+              <span>Fornecedores</span>
+            </Link>
           </li>
 
           <li>
-            <Link to="#">Adicionar novo fornecedor</Link>
+            <Link to="create_providers">
+              <FiPlus />
+              <span>Adicionar novo fornecedor</span>
+            </Link>
           </li>
 
           <li>
-            <Link to="#">Fluxo de caixa</Link>
+            <Link to="#">
+              <FiDollarSign />
+              <span>Fluxo de caixa</span>
+            </Link>
           </li>
         </ul>
       </Sidebar>

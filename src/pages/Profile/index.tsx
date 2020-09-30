@@ -1,5 +1,15 @@
 import React, { useRef, useCallback, ChangeEvent } from 'react';
-import { FiMail, FiLock, FiUser, FiCamera, FiArrowLeft } from 'react-icons/fi';
+import {
+  FiMail,
+  FiLock,
+  FiUser,
+  FiCamera,
+  FiArrowLeft,
+  FiCalendar,
+  FiPlus,
+  FiTruck,
+  FiDollarSign,
+} from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -12,7 +22,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, AvatarInput } from './styles';
+import { Container, Content, AvatarInput, Sidebar } from './styles';
 import api from '../../services/api';
 
 interface ProfileFormData {
@@ -140,6 +150,45 @@ const Profile: React.FC = () => {
           </Link>
         </div>
       </header>
+
+      <Sidebar>
+        <ul>
+          <li>
+            <Link to="/">
+              <FiCalendar />
+              <span>Orçamentos</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="create_appointments">
+              <FiPlus />
+              <span>Criar orçamentos</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="providers">
+              <FiTruck />
+              <span>Fornecedores</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="create_providers">
+              <FiPlus />
+              <span>Adicionar novo fornecedor</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="#">
+              <FiDollarSign />
+              <span>Fluxo de caixa</span>
+            </Link>
+          </li>
+        </ul>
+      </Sidebar>
 
       <Content>
         <Form
