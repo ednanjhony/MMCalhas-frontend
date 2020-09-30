@@ -12,6 +12,7 @@ import Dashboard from '../pages/Dashboard';
 import CreateAppointments from '../pages/CreateAppointments';
 
 import Providers from '../pages/Providers';
+import CreateProviders from '../pages/CreateProviders';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -27,6 +28,7 @@ const Routes: React.FC = () => (
     />
 
     <Route path="/providers" component={Providers} isPrivate />
+    <Route path="/create_providers" component={CreateProviders} isPrivate />
 
     <Route path="/profile" component={Profile} isPrivate />
   </Switch>

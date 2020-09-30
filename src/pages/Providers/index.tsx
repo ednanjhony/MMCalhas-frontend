@@ -76,7 +76,7 @@ const Providers: React.FC = () => {
           </li>
 
           <li>
-            <Link to="/providers">Fornecedores</Link>
+            <Link to="providers">Fornecedores</Link>
           </li>
 
           <li>

@@ -13,7 +13,7 @@ import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
-interface Appointment {
+interface Provider {
   id: string;
   name: string;
   address: string;
@@ -23,38 +23,34 @@ interface Appointment {
   desc: string;
 }
 
-const CreateAppointments: React.FC = () => {
+const CreateProviders: React.FC = () => {
   const { signOut, user } = useAuth();
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: Appointment) => {
+    async (data: Provider) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatorio'),
-          address: Yup.string().required('E-mail obrigatorio'),
           tel: Yup.string(),
-          date: Yup.string().required('Data obrigatoria'),
-          done: Yup.boolean().required('Campo obrigatorio'),
-          desc: Yup.string(),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await api.post('/appointments', data);
+        await api.post('/providers', data);
 
-        history.push('/');
+        history.push('/providers');
 
         addToast({
           type: 'success',
-          title: 'Orçamento registrado com sucesso',
-          description: 'Voce ja pode visualizar no dashboard',
+          title: 'Fornecedor registrado com sucesso',
+          description: 'Voce ja pode visualizar na area de fornecedores',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -67,9 +63,9 @@ const CreateAppointments: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro ao cadastrar orçamento',
+          title: 'Erro ao cadastrar fornecedor',
           description:
-            'Ocorreu um erro ao cadastrar orçamento, tente novamente',
+            'Ocorreu um erro ao cadastrar fornecedor, tente novamente',
         });
       }
     },
@@ -101,17 +97,10 @@ const CreateAppointments: React.FC = () => {
 
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Cadastre um orçamento</h1>
+          <h1>Cadastre um fornecedor</h1>
 
           <Input name="name" placeholder="Nome" />
-          <Input name="address" placeholder="Endereço" />
           <Input name="tel" placeholder="Telefone" />
-          <Input name="date" placeholder="Data" />
-          <Input
-            name="done"
-            placeholder="Orçamento ja foi feito ? True or False"
-          />
-          <Input name="desc" placeholder="Descriçao" />
 
           <Button type="submit">Cadastrar</Button>
         </Form>
@@ -120,4 +109,4 @@ const CreateAppointments: React.FC = () => {
   );
 };
 
-export default CreateAppointments;
+export default CreateProviders;

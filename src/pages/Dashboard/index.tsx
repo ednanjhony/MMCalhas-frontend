@@ -80,11 +80,11 @@ const Dashboard: React.FC = () => {
           </li>
 
           <li>
-            <Link to="#">Fornecedores</Link>
+            <Link to="providers">Fornecedores</Link>
           </li>
 
           <li>
-            <Link to="#">Adicionar novo fornecedor</Link>
+            <Link to="create_providers">Adicionar novo fornecedor</Link>
           </li>
 
           <li>
