@@ -20,6 +20,7 @@ import {
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
+import Input from '../../components/Input';
 
 interface Appointment {
   id: string;
@@ -33,6 +34,7 @@ interface Appointment {
 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [search, setSearch] = useState('');
 
   const { signOut, user } = useAuth();
 
@@ -40,7 +42,7 @@ const Dashboard: React.FC = () => {
     api.get<Appointment[]>('appointments').then((response) => {
       setAppointments(response.data);
     });
-  }, []);
+  }, [search]);
 
   const allAppointments = useMemo(() => {
     return appointments;
@@ -111,6 +113,13 @@ const Dashboard: React.FC = () => {
       <Content>
         <ListAppointments>
           <h1>Orçamentos</h1>
+
+          <input
+            type="search"
+            placeholder="Buscar"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
           {allAppointments.map((appointment) => (
             <Appointment>
