@@ -20,7 +20,7 @@ import {
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
-iimport Input from '../../components/Input';
+import Input from '../../components/Input';
 
 interface Appointment {
   id: string;
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
     api.get<Appointment[]>('appointments').then((response) => {
       setAppointments(response.data);
     });
-  }, [search]);
+  }, []);
 
   const allAppointments = useMemo(() => {
     return appointments;
@@ -102,7 +102,7 @@ const Dashboard: React.FC = () => {
           </li>
 
           <li>
-            <Link to="#">
+            <Link to="cash_flow">
               <FiDollarSign />
               <span>Fluxo de caixa</span>
             </Link>

@@ -143,7 +143,7 @@ const CreateAppointments: React.FC = () => {
           </li>
 
           <li>
-            <Link to="#">
+            <Link to="cash_flow">
               <FiDollarSign />
               <span>Fluxo de caixa</span>
             </Link>

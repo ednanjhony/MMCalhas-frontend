@@ -14,33 +14,37 @@ import {
   HeaderContent,
   Profile,
   Content,
-  ListProviders,
-  Provider,
+  ListAppointments,
+  Cashflow,
+  Total,
   Sidebar,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-interface Provider {
+interface CashFlow {
   id: string;
   name: string;
-  tel: string;
+  date: string;
+  price: number;
+  total: number;
+  desc: string;
 }
 
-const Providers: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>([]);
+const CashFlow: React.FC = () => {
+  const [cashFlow, setCashFlow] = useState<CashFlow[]>([]);
 
   const { signOut, user } = useAuth();
 
   useEffect(() => {
-    api.get<Provider[]>('providers').then((response) => {
-      setProviders(response.data);
+    api.get<CashFlow[]>('Cashflow').then((response) => {
+      setCashFlow(response.data);
     });
   }, []);
 
-  const allProviders = useMemo(() => {
-    return providers;
-  }, [providers]);
+  const allCashFlow = useMemo(() => {
+    return cashFlow;
+  }, [cashFlow]);
 
   return (
     <Container>
@@ -96,7 +100,7 @@ const Providers: React.FC = () => {
           </li>
 
           <li>
-            <Link to="cash_flow">
+            <Link to="#">
               <FiDollarSign />
               <span>Fluxo de caixa</span>
             </Link>
@@ -105,21 +109,57 @@ const Providers: React.FC = () => {
       </Sidebar>
 
       <Content>
-        <ListProviders>
-          <h1>Fornecedores</h1>
+        <ListAppointments>
+          <h1>Fluxo de caixa</h1>
 
-          {allProviders.map((provider) => (
-            <Provider>
-              <div>
-                <li>{provider.name}</li>
-                <li>{provider.tel}</li>
-              </div>
-            </Provider>
+          <Cashflow>
+            <div>
+              <li>Jubilau</li>
+              <li>02/10/2020</li>
+              <li>R$ 1.200,00</li>
+              <li>
+                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
+              </li>
+            </div>
+
+            <div>
+              <li>Jubilau</li>
+              <li>02/10/2020</li>
+              <li>R$ 1.200,00</li>
+              <li>
+                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
+              </li>
+            </div>
+
+            <div>
+              <li>Jubilau</li>
+              <li>02/10/2020</li>
+              <li>R$ 1.200,00</li>
+              <li>
+                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
+              </li>
+            </div>
+
+            <div>
+              <li>Jubilau</li>
+              <li>02/10/2020</li>
+              <li>R$ 1.200,00</li>
+              <li>
+                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
+              </li>
+            </div>
+          </Cashflow>
+
+          <Total>
+            <li>Total: R$ 4.800,00</li>
+          </Total>
+          {allCashFlow.map((cashFlow) => (
+            <li>Fake</li>
           ))}
-        </ListProviders>
+        </ListAppointments>
       </Content>
     </Container>
   );
 };
 
-export default Providers;
+export default CashFlow;
