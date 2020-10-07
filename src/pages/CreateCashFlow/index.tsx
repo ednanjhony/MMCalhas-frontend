@@ -26,44 +26,45 @@ import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
-interface Provider {
+interface CashFlow {
   id: string;
   name: string;
-  address: string;
-  tel: string;
-  date: string;
-  done: boolean;
+  date: Date;
+  price: number;
+  total: number;
   desc: string;
 }
 
-const CreateProviders: React.FC = () => {
+const CreateCashFlow: React.FC = () => {
   const { signOut, user } = useAuth();
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: Provider) => {
+    async (data: CashFlow) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatorio'),
-          tel: Yup.string(),
+          date: Yup.date(),
+          price: Yup.number(),
+          desc: Yup.string(),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await api.post('/providers', data);
+        await api.post('/cash_flow', data);
 
-        history.push('/providers');
+        history.push('/cash_flow');
 
         addToast({
           type: 'success',
-          title: 'Fornecedor registrado com sucesso',
-          description: 'Voce ja pode visualizar na area de fornecedores',
+          title: 'Valor registrado com sucesso',
+          description: 'Voce ja pode visualizar na area de fluxo de caixa',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -76,9 +77,9 @@ const CreateProviders: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro ao cadastrar fornecedor',
+          title: 'Erro ao cadastrar novo valor',
           description:
-            'Ocorreu um erro ao cadastrar fornecedor, tente novamente',
+            'Ocorreu um erro ao cadastrar novo valor, tente novamente',
         });
       }
     },
@@ -156,10 +157,12 @@ const CreateProviders: React.FC = () => {
 
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Cadastre um fornecedor</h1>
+          <h1>Cadastre um novo valor</h1>
 
           <Input name="name" placeholder="Nome" />
-          <Input name="tel" placeholder="Telefone" />
+          <Input name="date" placeholder="Data" />
+          <Input name="price" placeholder="Valor R$" />
+          <Input name="desc" placeholder="Telefone" />
 
           <Button type="submit">Cadastrar</Button>
         </Form>
@@ -168,4 +171,4 @@ const CreateProviders: React.FC = () => {
   );
 };
 
-export default CreateProviders;
+export default CreateCashFlow;

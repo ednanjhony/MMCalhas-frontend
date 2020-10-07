@@ -148,6 +148,13 @@ const CreateAppointments: React.FC = () => {
               <span>Fluxo de caixa</span>
             </Link>
           </li>
+
+          <li>
+            <Link to="create_cash_flow">
+              <FiPlus />
+              <span>Adicionar em Fluxo de caixa</span>
+            </Link>
+          </li>
         </ul>
       </Sidebar>
 

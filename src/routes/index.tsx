@@ -15,6 +15,7 @@ import Providers from '../pages/Providers';
 import CreateProviders from '../pages/CreateProviders';
 
 import CashFlow from '../pages/CashFlow';
+import CreateCashFlow from '../pages/CreateCashFlow';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -33,6 +34,7 @@ const Routes: React.FC = () => (
     <Route path="/create_providers" component={CreateProviders} isPrivate />
 
     <Route path="/cash_flow" component={CashFlow} isPrivate />
+    <Route path="/create_cash_flow" component={CreateCashFlow} isPrivate />
 
     <Route path="/profile" component={Profile} isPrivate />
   </Switch>
