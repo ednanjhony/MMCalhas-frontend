@@ -20,7 +20,6 @@ import {
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
-import Input from '../../components/Input';
 
 interface Appointment {
   id: string;

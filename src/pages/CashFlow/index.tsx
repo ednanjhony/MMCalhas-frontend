@@ -22,6 +22,8 @@ import {
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
+// import { formatPrice } from '../../utils/format';
+
 interface CashFlow {
   id: string;
   name: string;
@@ -32,19 +34,19 @@ interface CashFlow {
 }
 
 const CashFlow: React.FC = () => {
-  const [cashFlow, setCashFlow] = useState<CashFlow[]>([]);
+  const [cashFlows, setCashFlows] = useState<CashFlow[]>([]);
 
   const { signOut, user } = useAuth();
 
   useEffect(() => {
-    api.get<CashFlow[]>('Cashflow').then((response) => {
-      setCashFlow(response.data);
+    api.get<CashFlow[]>('cash_flow').then((response) => {
+      setCashFlows(response.data);
     });
   }, []);
 
   const allCashFlow = useMemo(() => {
-    return cashFlow;
-  }, [cashFlow]);
+    return cashFlows;
+  }, [cashFlows]);
 
   return (
     <Container>
@@ -120,49 +122,19 @@ const CashFlow: React.FC = () => {
           <h1>Fluxo de caixa</h1>
 
           <Cashflow>
-            <div>
-              <li>Jubilau</li>
-              <li>02/10/2020</li>
-              <li>R$ 1.200,00</li>
-              <li>
-                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
-              </li>
-            </div>
-
-            <div>
-              <li>Jubilau</li>
-              <li>02/10/2020</li>
-              <li>R$ 1.200,00</li>
-              <li>
-                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
-              </li>
-            </div>
-
-            <div>
-              <li>Jubilau</li>
-              <li>02/10/2020</li>
-              <li>R$ 1.200,00</li>
-              <li>
-                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
-              </li>
-            </div>
-
-            <div>
-              <li>Jubilau</li>
-              <li>02/10/2020</li>
-              <li>R$ 1.200,00</li>
-              <li>
-                10 Metros de calha / 10 metros de Rufo / Tampas: 02 / Bocal: 01
-              </li>
-            </div>
+            {allCashFlow.map((cashFlow) => (
+              <div>
+                <li>{cashFlow.name}</li>
+                <li>{cashFlow.date}</li>
+                <li>{cashFlow.price}</li>
+                <li>{cashFlow.desc}</li>
+              </div>
+            ))}
           </Cashflow>
 
           <Total>
             <li>Total: R$ 4.800,00</li>
           </Total>
-          {allCashFlow.map((cashFlow) => (
-            <li>Fake</li>
-          ))}
         </ListAppointments>
       </Content>
     </Container>
