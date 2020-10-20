@@ -177,3 +177,14 @@ export const Sidebar = styled.div`
     }
   }
 `;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const PaginationButton = styled.div`
+  display: flex;
+`;
+
+export const PaginationItem = styled.div``;

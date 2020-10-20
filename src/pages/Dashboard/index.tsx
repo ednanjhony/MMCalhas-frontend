@@ -17,6 +17,9 @@ import {
   ListAppointments,
   Appointment,
   Sidebar,
+  Pagination,
+  PaginationButton,
+  PaginationItem,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -33,15 +36,26 @@ interface Appointment {
 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [search, setSearch] = useState('');
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useState(4);
+  const [pages, setPages] = useState([] as any);
 
   const { signOut, user } = useAuth();
 
   useEffect(() => {
     api.get<Appointment[]>('appointments').then((response) => {
+      setTotal(response.headers['x-total-count']);
+      const totalPages = Math.ceil(total / limit);
+
+      const arrayPages = [];
+      for (let i = 1; i <= totalPages; i += 1) {
+        arrayPages.push(i);
+      }
+
+      setPages(arrayPages);
       setAppointments(response.data);
     });
-  }, []);
+  }, [limit, total]);
 
   const allAppointments = useMemo(() => {
     return appointments;
@@ -120,12 +134,7 @@ const Dashboard: React.FC = () => {
         <ListAppointments>
           <h1>Orçamentos</h1>
 
-          <input
-            type="search"
-            placeholder="Buscar"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <input type="search" placeholder="Buscar" />
 
           {allAppointments.map((appointment) => (
             <Appointment>
@@ -141,6 +150,14 @@ const Dashboard: React.FC = () => {
           ))}
         </ListAppointments>
       </Content>
+      <Pagination>
+        <div>{total}</div>
+        <PaginationButton>
+          {pages.map((page) => (
+            <PaginationItem>{page}</PaginationItem>
+          ))}
+        </PaginationButton>
+      </Pagination>
     </Container>
   );
 };
