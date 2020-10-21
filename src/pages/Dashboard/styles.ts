@@ -187,4 +187,7 @@ export const PaginationButton = styled.div`
   display: flex;
 `;
 
-export const PaginationItem = styled.div``;
+export const PaginationItem = styled.div`
+  margin: 0 10px;
+  cursor: pointer;
+`;

@@ -38,23 +38,31 @@ const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(4);
-  const [pages, setPages] = useState([] as any);
+  const [pages, setPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { signOut, user } = useAuth();
 
   useEffect(() => {
     api.get<Appointment[]>('appointments').then((response) => {
+      setAppointments(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    async function loadPages() {
+      const response = await api.get(`/appointments?page=${currentPage}&limit=${limit}`);
       setTotal(response.headers['x-total-count']);
       const totalPages = Math.ceil(total / limit);
 
-      const arrayPages = [];
+      const arrayPages = [] as any;
       for (let i = 1; i <= totalPages; i += 1) {
         arrayPages.push(i);
       }
 
       setPages(arrayPages);
-      setAppointments(response.data);
-    });
+    }
+    loadPages();
   }, [limit, total]);
 
   const allAppointments = useMemo(() => {
@@ -151,11 +159,17 @@ const Dashboard: React.FC = () => {
         </ListAppointments>
       </Content>
       <Pagination>
-        <div>{total}</div>
+        <div>KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK {total}</div>
         <PaginationButton>
-          {pages.map((page) => (
-            <PaginationItem>{page}</PaginationItem>
+          <PaginationItem>Previous</PaginationItem>
+          {pages.map(page => (
+            <PaginationItem
+             key={page}
+             onClick={() => setCurrentPage(page)}>
+               {page}
+             </PaginationItem>
           ))}
+          <PaginationItem>Next</PaginationItem>
         </PaginationButton>
       </Pagination>
     </Container>
