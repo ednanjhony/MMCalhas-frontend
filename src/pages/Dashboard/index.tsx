@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   FiPower,
@@ -17,9 +17,6 @@ import {
   ListAppointments,
   Appointment,
   Sidebar,
-  Pagination,
-  PaginationButton,
-  PaginationItem,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -36,10 +33,8 @@ interface Appointment {
 
 const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [total, setTotal] = useState(0);
-  const [limit, setLimit] = useState(4);
-  const [pages, setPages] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const [filteredAppointments, setFilteredAppointments] = useState<Appointment[]>([]);
 
   const { signOut, user } = useAuth();
 
@@ -50,24 +45,14 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    async function loadPages() {
-      const response = await api.get(`/appointments?page=${currentPage}&limit=${limit}`);
-      setTotal(response.headers['x-total-count']);
-      const totalPages = Math.ceil(total / limit);
-
-      const arrayPages = [] as any;
-      for (let i = 1; i <= totalPages; i += 1) {
-        arrayPages.push(i);
-      }
-
-      setPages(arrayPages);
-    }
-    loadPages();
-  }, [limit, total]);
-
-  const allAppointments = useMemo(() => {
-    return appointments;
-  }, [appointments]);
+    setFilteredAppointments(
+      appointments.filter(appointment => {
+        return appointment.name.toLowerCase().includes(search.toLowerCase()) ||
+        appointment.address.toLowerCase().includes(search.toLowerCase()) ||
+        appointment.date.toLowerCase().includes(search.toLowerCase());
+      })
+    );
+  }, [search, appointments])
 
   return (
     <Container>
@@ -142,10 +127,14 @@ const Dashboard: React.FC = () => {
         <ListAppointments>
           <h1>Orçamentos</h1>
 
-          <input type="search" placeholder="Buscar" />
+          <input
+           type="text" 
+           placeholder="Buscar" 
+           onChange={ e => setSearch(e.target.value) }
+          />
 
-          {allAppointments.map((appointment) => (
-            <Appointment>
+          {filteredAppointments.map((appointment) => (
+            <Appointment key={appointment.id}>
               <div>
                 <li>{appointment.name}</li>
                 <li>{appointment.address}</li>
@@ -158,20 +147,7 @@ const Dashboard: React.FC = () => {
           ))}
         </ListAppointments>
       </Content>
-      <Pagination>
-        <div>KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK {total}</div>
-        <PaginationButton>
-          <PaginationItem>Previous</PaginationItem>
-          {pages.map(page => (
-            <PaginationItem
-             key={page}
-             onClick={() => setCurrentPage(page)}>
-               {page}
-             </PaginationItem>
-          ))}
-          <PaginationItem>Next</PaginationItem>
-        </PaginationButton>
-      </Pagination>
+
     </Container>
   );
 };

@@ -80,6 +80,19 @@ export const ListAppointments = styled.div`
     padding-bottom: 16px;
     margin-bottom: 16px;
   }
+
+  > input {
+    background: #fff;
+    border: 0;
+    border-radius: 6px;
+    height: 35px;
+
+    &::placeholder {
+      color: #414141;
+      padding-left: 10px;
+      opacity: 0.5;
+    }
+  }
 `;
 
 export const Appointment = styled.ul`
@@ -122,7 +135,7 @@ export const Appointment = styled.ul`
 export const Sidebar = styled.div`
   width: 5rem;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   background-color: #fff;
   top: 130px;
   transition: width 200ms ease;
@@ -176,18 +189,4 @@ export const Sidebar = styled.div`
       display: block;
     }
   }
-`;
-
-export const Pagination = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const PaginationButton = styled.div`
-  display: flex;
-`;
-
-export const PaginationItem = styled.div`
-  margin: 0 10px;
-  cursor: pointer;
 `;
