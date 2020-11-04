@@ -38,6 +38,8 @@ const Dashboard: React.FC = () => {
 
   const { signOut, user } = useAuth();
 
+  
+
   useEffect(() => {
     api.get<Appointment[]>('appointments').then((response) => {
       setAppointments(response.data);
@@ -52,7 +54,7 @@ const Dashboard: React.FC = () => {
         appointment.date.toLowerCase().includes(search.toLowerCase());
       })
     );
-  }, [search, appointments])
+  }, [search, appointments]);
 
   return (
     <Container>
@@ -133,8 +135,8 @@ const Dashboard: React.FC = () => {
            onChange={ e => setSearch(e.target.value) }
           />
 
-          {filteredAppointments.map((appointment) => (
-            <Appointment key={appointment.id}>
+          {[...filteredAppointments].reverse().map((appointment) => (
+            <Appointment key={appointment.id} >
               <div>
                 <li>{appointment.name}</li>
                 <li>{appointment.address}</li>
@@ -147,7 +149,6 @@ const Dashboard: React.FC = () => {
           ))}
         </ListAppointments>
       </Content>
-
     </Container>
   );
 };

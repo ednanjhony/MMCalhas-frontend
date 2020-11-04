@@ -22,7 +22,7 @@ import {
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-// import { formatPrice } from '../../utils/format';
+import { formatPrice } from '../../utils/format';
 
 interface CashFlow {
   id: string;
@@ -122,11 +122,11 @@ const CashFlow: React.FC = () => {
           <h1>Fluxo de caixa</h1>
 
           <Cashflow>
-            {allCashFlow.map((cashFlow) => (
+            {[...allCashFlow].reverse().map((cashFlow) => (
               <div>
                 <li>{cashFlow.name}</li>
                 <li>{cashFlow.date}</li>
-                <li>{cashFlow.price}</li>
+                <li>{formatPrice(cashFlow.price)}</li>
                 <li>{cashFlow.desc}</li>
               </div>
             ))}

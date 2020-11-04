@@ -112,6 +112,7 @@ export const Sidebar = styled.div`
   position: fixed;
   background-color: #fff;
   top: 150px;
+  z-index: 9999;
   transition: width 200ms ease;
 
   ul {

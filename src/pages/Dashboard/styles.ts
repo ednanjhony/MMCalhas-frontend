@@ -134,10 +134,11 @@ export const Appointment = styled.ul`
 
 export const Sidebar = styled.div`
   width: 5rem;
-  height: 100vh;
-  position: absolute;
+  height: 530px;
+  position: fixed;
   background-color: #fff;
   top: 130px;
+  z-index: 9999;
   transition: width 200ms ease;
 
   ul {
