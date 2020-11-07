@@ -6,6 +6,7 @@ import {
   FiPlus,
   FiTruck,
   FiDollarSign,
+  FiEdit,
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import {
@@ -144,6 +145,9 @@ const Dashboard: React.FC = () => {
                 <li>{appointment.date}</li>
                 <li>{appointment.done}</li>
                 <li>{appointment.desc}</li>
+                <Link to="/update_appointments">
+                  <FiEdit />
+                </Link>
               </div>
             </Appointment>
           ))}

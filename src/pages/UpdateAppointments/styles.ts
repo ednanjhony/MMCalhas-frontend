@@ -68,80 +68,24 @@ export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
   display: flex;
-`;
+  justify-content: center;
 
-export const ListAppointments = styled.div`
-  flex: 1;
-  margin-right: 120px;
+  Form {
+    width: 600px;
+    text-align: center;
 
-  > h1 {
-    font-size: 36px;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-  }
-
-  > input {
-    background: #fff;
-    border: 0;
-    border-radius: 6px;
-    height: 35px;
-
-    &::placeholder {
-      color: #414141;
-      padding-left: 10px;
-      opacity: 0.5;
-    }
-  }
-`;
-
-export const Appointment = styled.ul`
-  & + div {
-    margin-top: 16px;
-  }
-
-  div {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    padding: 16px 24px;
-    border-radius: 10px;
-    margin-top: 12px;
-    position: relative;
-
-    &::before {
-      position: absolute;
-      height: 80%;
-      width: 1px;
-      left: 0;
-      top: 10%;
-      content: '';
-      background: #414141;
-    }
-
-    li {
-      display: flex;
-      width: 800px;
-      color: #414141;
-    }
-
-    li + li {
-      font-size: 13px;
-      margin-left: 5px;
-    }
-
-    a {
-      display: flex;
-      color: #414141;
-      justify-content: flex-end;
+    > h1 {
+      font-size: 36px;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
     }
   }
 `;
 
 export const Sidebar = styled.div`
   width: 5rem;
-  height: 530px;
+  height: 100vh;
   position: fixed;
   background-color: #fff;
   top: 130px;

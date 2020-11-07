@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 
 import Dashboard from '../pages/Dashboard';
 import CreateAppointments from '../pages/CreateAppointments';
+import UpdateAppointments from '../pages/UpdateAppointments';
 
 import Providers from '../pages/Providers';
 import CreateProviders from '../pages/CreateProviders';
@@ -27,6 +28,11 @@ const Routes: React.FC = () => (
     <Route
       path="/create_appointments"
       component={CreateAppointments}
+      isPrivate
+    />
+    <Route
+      path="/update_appointments"
+      component={UpdateAppointments}
       isPrivate
     />
 
